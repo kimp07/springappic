@@ -1,6 +1,5 @@
 package org.alex.springappic.config;
 
-import org.alex.springappic.tomcat.TomcatLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
@@ -29,11 +29,6 @@ public class SpringAppIcContextConfig {
 
     @Autowired
     private Environment environment;
-
-    @Bean
-    public TomcatLauncher getTomcatLauncher() {
-        return new TomcatLauncher(8080, "/");
-    }
 
     @Bean
     public ViewResolver getViewResolver() {
@@ -47,7 +42,7 @@ public class SpringAppIcContextConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getProperty("datasource.class"));
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("datasource.class")));
         dataSource.setUrl(environment.getProperty("datasource.url"));
         return dataSource;
     }
