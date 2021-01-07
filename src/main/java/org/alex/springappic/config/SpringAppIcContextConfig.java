@@ -14,9 +14,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
@@ -31,12 +34,32 @@ public class SpringAppIcContextConfig {
     private Environment environment;
 
     @Bean
-    public ViewResolver getViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".html");
+    @Autowired
+    public ServletContextTemplateResolver templateResolver(ServletContext servletContext) {
+        ServletContextTemplateResolver templateResolver
+                = new ServletContextTemplateResolver(servletContext);
+        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
 
-        return resolver;
+        return templateResolver;
+    }
+
+    @Bean
+    @Autowired
+    public SpringTemplateEngine templateEngine(ServletContext servletContext) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver(servletContext));
+        return templateEngine;
+    }
+
+    @Bean
+    @Autowired
+    public ThymeleafViewResolver viewResolver(ServletContext servletContext) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine(servletContext));
+        viewResolver.setOrder(1);
+        return viewResolver;
     }
 
     @Bean

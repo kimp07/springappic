@@ -20,7 +20,7 @@ public class TomcatLauncher {
 
     public void startEmbeddedServer() throws LifecycleException {
 
-        System.out.println("Starting tomcat..");
+        System.out.println("Starting Tomcat..");
         long seconds = Calendar.getInstance().getTimeInMillis(); // now
 
         Tomcat tomcat = new Tomcat();
@@ -30,7 +30,7 @@ public class TomcatLauncher {
 
         tomcat.start();
         long timeEllapsed = Calendar.getInstance().getTimeInMillis() - seconds;
-        System.out.println("server started at " + (timeEllapsed / 1000) + " sec ");
+        System.out.println("Tomcat started at " + (timeEllapsed / 1000) + " sec ");
         tomcat.getServer().await();
     }
 }
