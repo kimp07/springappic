@@ -1,5 +1,6 @@
 package org.alex.springappic.config;
 
+import org.alex.springappic.tomcat.TomcatLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,6 +29,11 @@ public class SpringAppIcContextConfig {
 
     @Autowired
     private Environment environment;
+
+    @Bean
+    public TomcatLauncher getTomcatLauncher() {
+        return new TomcatLauncher(8080, "/");
+    }
 
     @Bean
     public ViewResolver getViewResolver() {
