@@ -1,0 +1,8 @@
+org\alex\springappic\config\WebAppInitializer.class
+org\alex\springappic\dialect\SQliteIdentityColumnSupport.class
+org\alex\springappic\dialect\SqliteDialect.class
+org\alex\springappic\config\SpringAppIcContextConfig.class
+org\alex\springappic\controller\MainController.class
+org\alex\springappic\config\WebMvcConfig.class
+org\alex\springappic\entity\User.class
+org\alex\springappic\entity\Role.class
