@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
@@ -41,7 +42,7 @@ public class SpringAppIcContextConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getProperty("datasource.class"));
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("datasource.class")));
         dataSource.setUrl(environment.getProperty("datasource.url"));
         return dataSource;
     }
