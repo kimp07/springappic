@@ -2,3 +2,8 @@
 /workspace.xml
 /.idea/
 /target/
+/.dbeaver/
+/.settings/
+/tomcat.8080/
+/.classpath
+/.project
