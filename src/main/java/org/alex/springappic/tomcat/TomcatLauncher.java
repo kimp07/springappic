@@ -27,7 +27,7 @@ public class TomcatLauncher {
         tomcat.setPort(port);
 
         StandardContext context = (StandardContext) tomcat.addWebapp(webAppHost, new File(WEB_APP_PATH).getAbsolutePath());
-
+        context.backgroundProcess();
         tomcat.start();
         long timeEllapsed = Calendar.getInstance().getTimeInMillis() - seconds;
         System.out.println("Tomcat started at " + (timeEllapsed / 1000) + " sec ");
