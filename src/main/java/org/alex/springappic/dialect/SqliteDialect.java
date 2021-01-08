@@ -10,11 +10,16 @@ import org.hibernate.type.StringType;
 import java.sql.Types;
 
 public class SqliteDialect extends Dialect {
+    
+    public static final String CREATE_TEMPORARY_TABLE_STRING = "create temporary table if not exists";
+    public static final String INTEGER = "integer";
+    public static final String SUBSTR = "substr";
+    
     public SqliteDialect() {
-        registerColumnType(Types.BIT, "integer");
+        registerColumnType(Types.BIT, INTEGER);
         registerColumnType(Types.TINYINT, "tinyint");
         registerColumnType(Types.SMALLINT, "smallint");
-        registerColumnType(Types.INTEGER, "integer");
+        registerColumnType(Types.INTEGER, INTEGER);
         registerColumnType(Types.BIGINT, "bigint");
         registerColumnType(Types.FLOAT, "float");
         registerColumnType(Types.REAL, "real");
@@ -33,16 +38,16 @@ public class SqliteDialect extends Dialect {
         registerColumnType(Types.NULL, "null");
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
-        registerColumnType(Types.BOOLEAN, "integer");
+        registerColumnType(Types.BOOLEAN, INTEGER);
 
         registerFunction("concat",
                 new VarArgsSQLFunction(StringType.INSTANCE, "", "||", ""));
         registerFunction("mod",
                 new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
         registerFunction("substr",
-                new StandardSQLFunction("substr", StringType.INSTANCE));
+                new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
         registerFunction("substring",
-                new StandardSQLFunction("substr", StringType.INSTANCE));
+                new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
     }
 
     @Override
@@ -55,7 +60,7 @@ public class SqliteDialect extends Dialect {
     }
 
     public String getCreateTemporaryTableString() {
-        return "create temporary table if not exists";
+        return CREATE_TEMPORARY_TABLE_STRING;
     }
 
     public boolean dropTemporaryTableAfterUse() {
