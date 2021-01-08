@@ -4,6 +4,6 @@
 /target/
 /.dbeaver/
 /.settings/
-/tmcat.8080/
+/tomcat.8080/
 /.classpath
 /.project
