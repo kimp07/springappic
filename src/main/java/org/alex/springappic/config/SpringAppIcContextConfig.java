@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -25,6 +26,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
+@EnableJpaRepositories(basePackages = {"org.alex.springappic.repository"})
 @ComponentScan(basePackages = {"org.alex.springappic.*"})
 @EnableTransactionManagement
 @PropertySource("classpath:springappic.properties")
@@ -71,7 +73,7 @@ public class SpringAppIcContextConfig {
     }
 
     @Autowired
-    @Bean("entityManager")
+    @Bean("entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect",
@@ -96,8 +98,8 @@ public class SpringAppIcContextConfig {
     }
 
     @Autowired
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager getTransactionManagr(
+    @Bean(name = "transactionManagerFactory")
+    public PlatformTransactionManager getTransactionManager(
             LocalContainerEntityManagerFactoryBean entityManager) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManager.getObject());
