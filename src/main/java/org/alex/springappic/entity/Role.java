@@ -20,4 +20,6 @@ public class Role {
     private String roleName;
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<User> users;
+    @Column(name = "role_disabled")
+    private boolean roleDisabled;
 }

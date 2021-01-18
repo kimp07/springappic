@@ -11,9 +11,9 @@ import java.sql.Types;
 
 public class SqliteDialect extends Dialect {
     
-    public static final String CREATE_TEMPORARY_TABLE_STRING = "create temporary table if not exists";
-    public static final String INTEGER = "integer";
-    public static final String SUBSTR = "substr";
+    private static final String CREATE_TEMPORARY_TABLE_STRING = "create temporary table if not exists";
+    private static final String INTEGER = "integer";
+    private static final String SUBSTR = "substr";
     
     public SqliteDialect() {
         registerColumnType(Types.BIT, INTEGER);

@@ -7,7 +7,7 @@ public class SpringappIc {
     
     public static void main(String[] args) {
 
-        final TomcatLauncher tomcatLauncher = new TomcatLauncher(8080, "/");
+        final TomcatLauncher tomcatLauncher = new TomcatLauncher(8081, "/");
 
         Thread tomcatThread = new Thread(() -> {
             try {
