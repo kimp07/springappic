@@ -13,7 +13,8 @@ public class User {
 
     @Id
     @Column(name = "_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "user_generator")
+    @TableGenerator(name = "user_generator", table = "id_generator", initialValue = 0)
     private Integer id;
     @Column(name = "user_name", length = 100, nullable = false)
     private String userName;

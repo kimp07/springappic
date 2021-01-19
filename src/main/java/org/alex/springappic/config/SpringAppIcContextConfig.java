@@ -98,7 +98,7 @@ public class SpringAppIcContextConfig {
     }
 
     @Autowired
-    @Bean(name = "transactionManagerFactory")
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager(
             LocalContainerEntityManagerFactoryBean entityManager) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

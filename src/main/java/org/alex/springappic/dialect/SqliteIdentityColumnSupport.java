@@ -3,10 +3,10 @@ package org.alex.springappic.dialect;
 import org.hibernate.MappingException;
 import org.hibernate.dialect.identity.IdentityColumnSupportImpl;
 
-public class SQliteIdentityColumnSupport extends IdentityColumnSupportImpl {
+public class SqliteIdentityColumnSupport extends IdentityColumnSupportImpl {
     @Override
     public boolean supportsIdentityColumns() {
-        return true;
+        return false;
     }
 
     @Override
@@ -16,6 +16,12 @@ public class SQliteIdentityColumnSupport extends IdentityColumnSupportImpl {
 
     @Override
     public String getIdentityColumnString(int type) throws MappingException {
-        return "integer";
+        return "";
     }
+
+    @Override
+    public boolean hasDataTypeInIdentityColumn() {
+        return false;
+    }
+    
 }
