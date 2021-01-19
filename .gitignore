@@ -7,5 +7,10 @@
 /tomcat.8080/
 /.classpath
 /.project
+<<<<<<< HEAD
 /*.iml
 /springappic.log
+=======
+/springappic.log
+/tomcat.*/
+>>>>>>> refs/heads/master
