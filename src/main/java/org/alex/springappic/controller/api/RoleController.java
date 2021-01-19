@@ -28,7 +28,7 @@ public class RoleController {
         roleEntity.setRoleDisabled(role.isRoleDisabled());
         if (roleDAO.saveRole(roleEntity) == null) {
             return new ResponseEntity<>("Can`t save role", HttpStatus.CONFLICT);
-        };
+        }
         return new ResponseEntity<>("New role successfully added", HttpStatus.OK);
     }
 
